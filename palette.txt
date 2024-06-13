@@ -1,0 +1,4 @@
+#401F71 -> main - purple color
+#824D74 -> secondary - purple pink color 
+#BE7B72 -> alternative 1 - brown skin color
+#FDAF7B -> alternative 2 - orange color

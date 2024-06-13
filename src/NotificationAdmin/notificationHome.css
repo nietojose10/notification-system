@@ -1,0 +1,26 @@
+.ctn-notification-system-menu .card-notification-home .card-header {
+    display: flex;
+    align-items: center;
+    
+}
+
+.ctn-notification-system-menu .card-notification-home {
+   /* height: 10rem; */
+   margin-bottom: 1rem;
+} 
+
+/* .ctn-notification-system-menu .card-notification-home .card-body {
+    display: flex;
+    align-items: center;
+} */
+
+.card-notification-home .card-header .card-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.ctn-notification-system-menu .card-notification-home:hover {
+    cursor: pointer;
+    transform: scale(1.015);
+    transition: .50s ease-in-out;
+}
