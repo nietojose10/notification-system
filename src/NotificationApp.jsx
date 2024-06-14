@@ -1,11 +1,16 @@
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { BrowserRouter } from 'react-router-dom';
+import { AppRouter } from './router';
 import { NotificationHome } from './NotificationAdmin';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const NotificationApp = () => {
   return (
-    <div>
-      <NotificationHome />
-    </div>
+    <Provider store={ store }>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </Provider>
   )
 }
