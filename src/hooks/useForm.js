@@ -31,9 +31,9 @@ export const useForm = ( initialForm = {}, initialValidations = [] ) => {
 
     const createValidators = () => {
         const formCheckedValues = {};
-        console.log(initialValidations);
+        
         initialValidations.map( validation => {
-            console.log(validation);
+            
             const { formField, fn, message } = validation;
             
             if ( !fn( formState[formField] ) ){

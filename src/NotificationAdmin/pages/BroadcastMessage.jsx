@@ -1,10 +1,10 @@
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { useForm } from '../../hooks/useForm';
 import { NotificationLayout } from '../';
 import '../broadcastMessage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTowerBroadcast } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useForm, useBroadcastMessageStore } from '../../hooks';
 
 const formFields = {
   category: '',
@@ -33,13 +33,17 @@ export const BroadcastMessage = () => {
 
   const { category, message, categoryValid, messageValid, formState, setFormState, onInputChange, isFormValid } = useForm( formFields, formValidations );
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const { startSendingMessage } = useBroadcastMessageStore();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     setFormSubmitted(true);
     console.log('Submitting form...');
     if (!isFormValid) return;
     console.log(formState);
+    
+    await startSendingMessage(formState);
+
   }
 
   return (
