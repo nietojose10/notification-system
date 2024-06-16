@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTowerBroadcast } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { useForm, useBroadcastMessageStore } from '../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 const formFields = {
   category: '',
@@ -33,23 +34,21 @@ export const BroadcastMessage = () => {
 
   const { category, message, categoryValid, messageValid, formState, setFormState, onInputChange, isFormValid } = useForm( formFields, formValidations );
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const { startSendingMessage } = useBroadcastMessageStore();
+  const { startSendingMessage, isSaving } = useBroadcastMessageStore();
+  const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     setFormSubmitted(true);
-    console.log('Submitting form...');
     if (!isFormValid) return;
-    console.log(formState);
-    
     await startSendingMessage(formState);
-
+    navigate('/logHistory');
   }
 
   return (
     <NotificationLayout>
       <Container>
-        <div className="ctn-broadcast-message-form">
+        <div className="ctn-broadcast-message-form" style={{ cursor: isSaving ? 'wait' : '' }}>
           
           <Row className="align-item-center">
               <Col>
@@ -107,6 +106,7 @@ export const BroadcastMessage = () => {
               <Row className="ctn-broadcast-buttons">
                 <Col lg={8} md={12} sm={12} >
                   <Button
+                    disabled={isSaving}
                     type="submit"
                     className="btn-custom-primary"
                   >

@@ -8,7 +8,7 @@ export const broadcastMessageSlice = createSlice({
         channels: []
     },
     reducers: {
-        onSavingNotification: ( state, /* action */ ) => {
+        onSavingNotification: ( state ) => {
             state.isSaving = true;
         },
         onLoadCategories: ( state, { payload }) => {

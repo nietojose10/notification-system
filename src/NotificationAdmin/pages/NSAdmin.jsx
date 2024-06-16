@@ -1,7 +1,13 @@
-import React from 'react'
+import { AdminForm, NotificationLayout } from '../'
+import { Container } from 'react-bootstrap'
+import '../nsAdmin.css';
 
 export const NSAdmin = () => {
   return (
-    <div>NSAdmin</div>
+    <NotificationLayout>
+      <Container>
+        <AdminForm/>
+      </Container>
+    </NotificationLayout>
   )
 }

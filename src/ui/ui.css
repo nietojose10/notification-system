@@ -55,10 +55,19 @@ nav.navbar.dynamic-navbar .me-auto {
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
 
     /* Layout */
     .container-in-layout {
-        padding: 100px 0 0px 0;
+        padding: 200px 0 0px 0;
+    }
+}
+
+
+@media screen and (min-width: 1000px) and (max-width: 1500px ) {
+
+    /* Layout */
+    .container-in-layout {
+        padding: 100px 0px 0px 0px;
     }
 }
