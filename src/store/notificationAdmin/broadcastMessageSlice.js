@@ -4,8 +4,7 @@ export const broadcastMessageSlice = createSlice({
     initialState: {
         isSaving: false,
         logHistory: [],
-        categories: [],
-        channels: []
+        categories: []
     },
     reducers: {
         onSavingNotification: ( state ) => {
@@ -13,9 +12,6 @@ export const broadcastMessageSlice = createSlice({
         },
         onLoadCategories: ( state, { payload }) => {
             state.categories = payload;
-        },
-        onLoadChannels: ( state, { payload } ) => {
-            state.channels = payload;
         },
         onAddMessage: ( state, { payload } ) => {
             state.logHistory.push( payload );
@@ -28,7 +24,7 @@ export const broadcastMessageSlice = createSlice({
         },
         onClearSaving: ( state ) => {
             state.isSaving = false;
-        }
+        },
     }
 });
-export const { onSavingNotification, onLoadCategories, onLoadChannels, onLoadLogHistory, onClearSaving, onAddMessage } = broadcastMessageSlice.actions;
+export const { onSavingNotification, onLoadCategories, onLoadLogHistory, onClearSaving, onAddMessage } = broadcastMessageSlice.actions;

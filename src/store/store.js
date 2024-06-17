@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { broadcastMessageSlice } from './';
+import { authSlice, broadcastMessageSlice } from './';
 
 export const store = configureStore({
     reducer: {
         broadcastMessage: broadcastMessageSlice.reducer,
+        auth: authSlice.reducer,
         
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

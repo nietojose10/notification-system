@@ -9,7 +9,6 @@ export const NotificationLayout = ({ children }) => {
             <Nav.Link href="/broadcastMessage">Broadcast Message</Nav.Link>
             <Nav.Link href="/logHistory">Log History</Nav.Link>
             <Nav.Link href="/NSadmin">Admin</Nav.Link>
-            {/* /NSadmin */}
         </NavBar>
         <div className="container-in-layout" >
             { children }

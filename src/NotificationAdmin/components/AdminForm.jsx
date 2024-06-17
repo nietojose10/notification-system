@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faGears, faTowerBroadcast } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import { useAdminStore, useForm } from '../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 
 const formFields = {
@@ -48,7 +49,8 @@ export const AdminForm = () => {
             onInputChange, setFormState, isFormValid
         } = useForm( formFields, formValidations );
     const [formSubmitted, setFormSubmitted] = useState(false);
-    const { startSavingUser } = useAdminStore();
+    const { startSavingUser, isSaving, startLoadingCategories, categories, startLoadingChannels, channels } = useAdminStore();
+    const navigate = useNavigate();
 
     const [formValues, setFormValues] = useState({
         categories: [],
@@ -62,12 +64,17 @@ export const AdminForm = () => {
             });
     }
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+      
+        startLoadingCategories();
+        startLoadingChannels();
+
+    }, [])
+
+    const handleSubmit = async(e) => {
         e.preventDefault();
         setFormSubmitted(true);
-        console.log('Submitting...');
         if( !isFormValid ) return;
-        // console.log();
 
         const categoriesValues = formValues.categories.map( data => 
             data.value
@@ -77,11 +84,12 @@ export const AdminForm = () => {
             data.value
         );
 
-        startSavingUser({name:username, email, phoneNumber, subscribed: categoriesValues, channels: channelsValues});
+        await startSavingUser({name:username, email, phoneNumber, subscribed: categoriesValues, channels: channelsValues});
+        navigate('/');
     }
 
   return (
-    <div className="ctn-admin-form">
+    <div className="ctn-admin-form" style={{ cursor: isSaving ? 'wait' : '' }}>
           <Row className="align-item-center">
               <Col>
                   <div className="title-form"><FontAwesomeIcon icon={faGears} size="2xl" style={{ color: "#BE7B72"}} /></div>
@@ -153,16 +161,16 @@ export const AdminForm = () => {
             </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="id_categories">
-                    <Form.Label>Message Categories</Form.Label>
+                    <Form.Label>Message Types</Form.Label>
                     <Select
                         value={ formValues.categories }
                         onChange={( event ) => onSelectChange( event, 'categories' )}
-                        options={categoriesOptions}
-                         // options={
-                        //     specialities.map( data => (
-                        //         { value: data.speciality, label: data.speciality }
-                        //     ))
-                        // 
+                        // options={categoriesOptions}
+                        options={
+                            categories.map( data => (
+                                { value: (data.messageType).toLowerCase(), label: data.messageType }
+                            ))
+                        }
                         isMulti
                         placeholder="Select the subscriptions"
                     />
@@ -174,12 +182,12 @@ export const AdminForm = () => {
                     <Select
                         value={ formValues.channels }
                         onChange={( event ) => onSelectChange( event, 'channels' )}
-                        options={notificationTypes}
-                        // options={
-                        //     specialities.map( data => (
-                        //         { value: data.speciality, label: data.speciality }
-                        //     ))
-                        // } 
+                        // options={notificationTypes}
+                        options={
+                            channels.map( data => (
+                                { value: (data.notificationType).toLowerCase(), label: data.notificationType }
+                            ))
+                        }
                         isMulti
                         placeholder="Select the notification types"
                     />
@@ -188,6 +196,7 @@ export const AdminForm = () => {
             <Row className="ctn-admin-user-buttons">
                 <Col lg={8} md={12} sm={12} >
                     <Button
+                    disabled={isSaving}
                     type="submit"
                     className="btn-custom-primary"
                     >
