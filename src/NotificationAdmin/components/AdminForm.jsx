@@ -106,6 +106,7 @@ export const AdminForm = () => {
                 <Form.Label>Username</Form.Label>
                 <Form.Control 
                     type="text"
+                    data-testid="username"
                     placeholder="Enter an username"
                     name="username"
                     value={ username }
@@ -126,6 +127,7 @@ export const AdminForm = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control 
                     type="text"
+                    data-testid="email"
                     placeholder="Enter an email"
                     name="email"
                     value={ email }
@@ -147,6 +149,7 @@ export const AdminForm = () => {
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control 
                     type="text"
+                    data-testid="phoneNumber"
                     placeholder="Enter a phone number"
                     name="phoneNumber"
                     value={ phoneNumber }
@@ -164,6 +167,7 @@ export const AdminForm = () => {
                     <Form.Label>Message Types</Form.Label>
                     <Select
                         value={ formValues.categories }
+                        aria-label="categories"
                         onChange={( event ) => onSelectChange( event, 'categories' )}
                         // options={categoriesOptions}
                         options={
@@ -181,6 +185,7 @@ export const AdminForm = () => {
                     <Form.Label>Notification Types</Form.Label>
                     <Select
                         value={ formValues.channels }
+                        aria-label="channels"
                         onChange={( event ) => onSelectChange( event, 'channels' )}
                         // options={notificationTypes}
                         options={
@@ -196,6 +201,7 @@ export const AdminForm = () => {
             <Row className="ctn-admin-user-buttons">
                 <Col lg={8} md={12} sm={12} >
                     <Button
+                    aria-label="btn-save"
                     disabled={isSaving}
                     type="submit"
                     className="btn-custom-primary"

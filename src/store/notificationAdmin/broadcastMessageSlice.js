@@ -14,7 +14,7 @@ export const broadcastMessageSlice = createSlice({
             state.categories = payload;
         },
         onAddMessage: ( state, { payload } ) => {
-            state.logHistory.push( payload );
+            state.logHistory.push( ...payload );
         },
         onLoadLogHistory: ( state, { payload }) => {
             payload.map( message => {

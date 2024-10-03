@@ -36,9 +36,7 @@ export const BroadcastForm = () => {
     const navigate = useNavigate();
   
     useEffect(() => {
-      
         startLoadingCategories();
-
     }, [])
     
 
@@ -46,8 +44,9 @@ export const BroadcastForm = () => {
       e.preventDefault();
       setFormSubmitted(true);
       if (!isFormValid) return;
+      // console.log(formState);
       await startSendingMessage(formState);
-      navigate('/');
+      // navigate('/');
     }
 
   return (
@@ -64,10 +63,11 @@ export const BroadcastForm = () => {
             <Form.Group as={Col} lg={12} md={12} sm={12} className="mb-3" controlId="id_category">
                 <Form.Label>Category</Form.Label>
                 <Form.Select 
-                    name="category"
-                    value={category}
-                    onChange={onInputChange}
-                    isInvalid={ !!categoryValid && formSubmitted }
+                  data-testid="category"
+                  name="category"
+                  value={category}
+                  onChange={onInputChange}
+                  isInvalid={ !!categoryValid && formSubmitted }
                 >
                      <option value={''}>Select</option>
                     {
@@ -90,6 +90,7 @@ export const BroadcastForm = () => {
                 <Form.Label>Message</Form.Label>
                 <Form.Control 
                     as="textarea"
+                    data-testid="message"
                     placeholder="Enter a message you want to broadcast"
                     name="message"
                     value={ message }

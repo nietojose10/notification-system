@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { nsApi } from '../api';
 import Swal from 'sweetalert2';
-import { onClearSaving, onLoadCategories, onSavingNotification } from '../store';
+import { onClearSaving, onLoadCategories, onSavingNotification, onAddMessage } from '../store';
 
 const Toast = Swal.mixin({
     toast: true,
@@ -17,14 +17,15 @@ const Toast = Swal.mixin({
 
 export const useBroadcastMessageStore = () => {
     const dispatch = useDispatch();
-    const { isSaving, categories } = useSelector( state => state.broadcastMessage );
+    const { isSaving, categories, logHistory } = useSelector( state => state.broadcastMessage );
 
     const startSendingMessage = async({ category, message }) => {
 
         try {
             dispatch( onSavingNotification() );
-            const { data } = await nsApi.post('/broadcast/sendMessage', { category, message } );            
+            const { data } = await nsApi.post('/broadcast/sendMessage', { category, message } );      
             await Toast.fire({ icon: 'success', title: 'Message successfully sent.' });
+            dispatch( onAddMessage(data.messagesSent) );
             dispatch( onClearSaving() );
 
         } catch (error) {
@@ -50,6 +51,7 @@ export const useBroadcastMessageStore = () => {
         //*Properties
             isSaving,
             categories,
+            logHistory,
         //*Methods
             startSendingMessage,
             startLoadingCategories

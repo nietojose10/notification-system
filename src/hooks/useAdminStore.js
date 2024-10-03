@@ -22,12 +22,13 @@ export const useAdminStore = () => {
 
     const startSavingUser = async({ name, email, phoneNumber, subscribed, channels }) => {
         
+        console.log('Calling startSavingUser');
         try {
             dispatch( onSavingUser() );
             await nsApi.post('/auth/new',{ name, email, phoneNumber, subscribed, channels });
             
             await Toast.fire({ icon: 'success', title: 'User Successfully created.' });
-            dispatch( onClearSavingUser() );
+            // dispatch( onClearSavingUser() );
         } catch (error) {
             console.log(error);
             await Toast.fire({ icon: 'error', title: 'User could not be created.' });

@@ -40,7 +40,7 @@ export const MessagesReport = () => {
       
       
   return (
-    <div className="ctn-log-history-table ag-theme-alpine" style={{ height: 580 }}>
+    <div data-testid="ctn-aggrid-react" className="ctn-log-history-table ag-theme-alpine" style={{ height: 580 }}>
           <AgGridReact
             rowData={rowData}
             columnDefs={columnDefs}
