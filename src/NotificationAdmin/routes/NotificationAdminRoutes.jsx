@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { BroadcastMessage, LogHistory, NSAdmin, NotificationHome } from '../';
 
-
 export const NotificationAdminRoutes = () => {
   return (
     <Routes>
